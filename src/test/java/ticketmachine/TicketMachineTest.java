@@ -34,13 +34,13 @@ class TicketMachineTest {
 	// S3 : on n’imprime pas le ticket si le montant inséré est insuffisant
 	void pasDargentPasDeTicket() {
 		machine.insertMoney(20);
-		assertEquals(false,machine.printTicket(),"faut pas imprimer t'as pas mis assez de sous");
+		assertFalse(machine.printTicket(),"faut pas imprimer t'as pas mis assez de sous");
 	}
 	@Test
 	// S4 : on imprime le ticket si le montant inséré est suffisant
 	void deLargentUnTicket() {
 		machine.insertMoney(60);
-		assertEquals(true,machine.printTicket(),"le montant est suffisant");
+		assertTrue(machine.printTicket(),"le montant est suffisant");
 		//ici on pourrai utiliser un assertTrue()
 	}
 
@@ -64,8 +64,10 @@ class TicketMachineTest {
 	//S7 : refund() rend correctement la monnaie
 	void rendLaMonnaie(){
 		machine.insertMoney(60);
+		machine.printTicket();
 		assertEquals(60-machine.getPrice(),machine.refund(),"le montant à rendre doit être mis a jour");
 	}
+
 
 	@Test
 	//S8 : refund()remet la balance à zéro
